@@ -12,6 +12,14 @@
 
 Axc 只负责编辑和校验配置。条件执行、模型调用、保存和调度由你的应用完成。
 
+| 浅色                                                                                                       | 深色                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| ![条件编辑器](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition.zh-CN.png) | ![条件编辑器（深色）](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-dark.zh-CN.png) |
+
+错误显示在所属的行上（如上图的“必填”）。AI 候选先预览，再决定是否应用：
+
+![AI 辅助候选预览](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-assist.zh-CN.png)
+
 ## 目录
 
 - [安装](#安装)
@@ -101,6 +109,8 @@ const [decision, setDecision] = useState(emptyDecision);
 
 <AxcDecision fields={fields} value={decision} onChange={setDecision} models={runtimeModels} />;
 ```
+
+![判断流程编辑器：前置条件、AI 判断、后置条件](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/decision.zh-CN.png)
 
 `models` 是可以执行判断的运行模型。`conditionAssist` 可为前置、后置条件编辑器加上 AI 辅助。
 
@@ -351,7 +361,11 @@ interface AxcAssistRequest {
 ```
 
 - `generate` 必须返回已解析的 JSON，而不是文本或 HTTP 响应包。Axc 不去除 Markdown 围栏、不解包字符串、不修复字段、不自动重试。
-- 不合法的答复会显示具体问题，且无法应用。Promise 被 reject 时显示你的错误信息。
+- 不合法的答复会显示具体问题，且无法应用：
+
+  ![模型返回不合法的结果](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/assist-invalid.zh-CN.png)
+
+- Promise 被 reject 时显示你的错误信息。
 - 点击“取消”、被编辑的值发生变化、编辑器被禁用或组件卸载时，都会 abort `signal` 并忽略迟到的结果。供应商是否真的停止计算（及计费）由你决定。
 - 在不同记录之间切换时，请为组件设置按记录区分的 `key`，避免草稿串到另一条记录。
 

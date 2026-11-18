@@ -13,6 +13,14 @@ has no dependencies and runs anywhere, including Node.js.
 
 Axc edits and validates configuration. It does not evaluate conditions, call models, save data or schedule jobs. Your app does that.
 
+| Light                                                                                                      | Dark                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ![Condition editor](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition.png) | ![Condition editor, dark theme](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-dark.png) |
+
+Errors are shown on the row they belong to ("Required." above). AI candidates are previewed before they are applied:
+
+![AI assist candidate preview](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-assist.png)
+
 ## Contents
 
 - [Install](#install)
@@ -102,6 +110,8 @@ const [decision, setDecision] = useState(emptyDecision);
 
 <AxcDecision fields={fields} value={decision} onChange={setDecision} models={runtimeModels} />;
 ```
+
+![Decision editor: precondition, AI decision, postcondition](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/decision.png)
 
 `models` lists the models that may run the decision. `conditionAssist` optionally adds an assistant to the pre- and postcondition editors.
 
@@ -354,7 +364,11 @@ interface AxcAssistRequest {
 ```
 
 - `generate` must resolve to parsed JSON, not text and not an HTTP envelope. Axc does not strip Markdown fences, unwrap strings, fix fields or retry.
-- An invalid answer shows its issues and cannot be applied. A rejected promise shows your error message.
+- An invalid answer shows its issues and cannot be applied:
+
+  ![Invalid model answer](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/assist-invalid.png)
+
+- A rejected promise shows your error message.
 - **Cancel**, a change to the edited value, disabling the editor, or unmounting aborts `signal` and ignores the late result. Whether the provider stops (and stops billing) is up to you.
 - If you switch between records, give the component a `key` per record so drafts do not carry over.
 

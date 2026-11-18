@@ -6,7 +6,8 @@
 	"license": "MIT",
 	"files": [
 		"dist",
-		"docs",
+		"docs/*.md",
+		"docs/*.tsx",
 		"README.md",
 		"README.zh-CN.md",
 		"CHANGELOG.md",
