@@ -8,6 +8,13 @@
 Install: `npm install github:axclogo/AxcCondition#v0.2.0` (not on the npm registry; npm builds it on install). Import styles: `import '@axc/condition/styles.css'`.
 Framework-free protocol (validation, schemas, prompts): `import … from '@axc/condition/core'`.
 
+Problems it solves:
+- Saved filters that break at runtime (wrong types, empty groups, unknown fields, invalid dates): one strict parser checks rules against the field catalog before saving.
+- Unreliable "generate a filter from a sentence" with LLMs: JSON Schema for structured output, strict parsing, preview, explicit apply.
+- Errors you cannot act on: every issue is `{ code, path, params }`, shown on its row.
+- Builders that force their own UI: eight replaceable controls; tested Ant Design adapter included.
+- Combining rules with AI decisions: precondition → AI decision → postcondition editor.
+
 Key facts for code generation:
 - Components: `AxcCondition` (rule editor), `AxcConditionAssist` (+ AI drafting), `AxcDecision`
   (precondition → AI decision → postcondition), `AxcDecisionAssist` (+ AI drafting of the whole plan).

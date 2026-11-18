@@ -4,17 +4,22 @@ English | [简体中文](./README.zh-CN.md)
 
 [![CI](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml/badge.svg)](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml)
 
-A lightweight **React query builder / condition builder / filter builder** that stores rules as plain JSON,
-validates them with stable error codes, and can let an LLM generate conditions through JSON Schema
-(structured output). It also edits a precondition → AI decision → postcondition workflow. The protocol layer (`@axc/condition/core`)
-has no dependencies and runs anywhere, including Node.js.
+A lightweight **React query builder / condition builder / filter builder** for apps where users (or an LLM)
+define AND/OR rules that you store as JSON and run on your own backend.
 
-- React 18 or 19 is the only peer dependency. No UI library, no model SDK, no network calls.
-- Every input, select, textarea and button goes through a small adapter layer, so you can use your own UI library.
-- English and Simplified Chinese are built in; every string, error message and model prompt can be replaced.
-- Validation returns all problems with a stable `code`, a `path` and `params`, so the editor can show each error on its row.
+## The problems it solves
 
-Axc edits and validates configuration. It does not evaluate conditions, call models, save data or schedule jobs. Your app does that.
+| Problem                                                                                                                                                                                 | What Axc does                                                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Saved filters break at runtime.** Builders happily emit `"1"` for a number field, empty groups, unknown fields or `2023-02-30`, and you find out when the backend evaluates the rule. | One parser (`parseCondition`) checks every rule against your field catalog: types are never coerced, dates must be real, datetimes need a time zone, ranges must be ordered, regexes must compile. Call it before saving.                                     |
+| **"Generate a filter from a sentence" with an LLM is unreliable.** Models invent fields, return strings for numbers, wrap JSON in Markdown, or quietly approximate what was asked.      | Every request carries a JSON Schema built from your catalog (for structured output). The answer goes through the same parser, is shown as a preview with the model's explanation, and only **Apply** writes it back. Cancelled or stale requests are dropped. |
+| **Errors are one string you cannot act on.** You get the first message, in one language, and cannot tell which row it belongs to.                                                       | Validation returns **every** issue as `{ code, path, params }`. The editor shows each one on its own row and marks the control invalid (`aria-invalid`). Your code branches on `code`; messages come from a locale.                                           |
+| **The builder brings its own UI.** Its inputs and dropdowns do not match your design system, and replacing them means forking.                                                          | All eight basic controls (input, select, multi-select, checkbox, tags, date, textarea, button) go through a small adapter layer. Plug in Ant Design, MUI, shadcn/ui or your own; a tested Ant Design adapter is included.                                     |
+| **Heavy dependencies and hard-coded language.**                                                                                                                                         | React 18/19 is the only dependency (≈19 KB gzip). English and Chinese are built in; every string and model prompt can be overridden.                                                                                                                          |
+| **AI-based decisions are expensive and hard to combine with rules.** You want rules to pre-filter what reaches the model, and rules on the model's output afterwards.                   | `AxcDecision` edits a precondition → AI decision → postcondition plan. The precondition decides which records reach the model; the postcondition can read `ai.matched`, `ai.reason` and your own typed AI outputs.                                            |
+
+Axc edits and validates. It does not evaluate rules, call models or store data; your app does, with the
+framework-free protocol in `@axc/condition/core` (also usable in Node.js).
 
 | Light                                                                                                      | Dark                                                                                                                        |
 | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
