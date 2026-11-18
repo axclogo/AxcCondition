@@ -1,0 +1,29 @@
+# @axc/condition
+
+> Lightweight React query builder / condition builder / filter builder. Rules are plain JSON
+> (`{ combinator, not, rules }`), validated with stable error codes (`{ code, path, params }`).
+> Optional LLM generation through JSON Schema structured output. Zero dependencies besides React 18/19.
+> Any UI library can supply the controls. English and Chinese built in.
+
+Install: `npm install @axc/condition`. Import styles: `import '@axc/condition/styles.css'`.
+Framework-free protocol (validation, schemas, prompts): `import … from '@axc/condition/core'`.
+
+Key facts for code generation:
+- Components: `AxcCondition` (rule editor), `AxcConditionAssist` (+ AI drafting), `AxcDecision`
+  (precondition → AI decision → postcondition), `AxcDecisionAssist` (+ AI drafting of the whole plan).
+- Fields: `{ name, label, dataType?: 'string'|'number'|'boolean'|'date'|'datetime'|'enum'|'array'|'object', values?, operators?, valueSources? }`.
+  `values` only on string/enum/array fields.
+- Always call `parseCondition(value, { fields })` before saving; it throws `AxcValidationError` with `issues`.
+  `validateCondition` returns the issues without throwing. Branch on `issue.code`, never on message text.
+- AI: pass `assist={{ models: [{ id, label }], generate: (request, signal) => yourModelCall(request) }}`;
+  `request` is `{ model, prompt, response_schema }`; resolve with the parsed JSON object.
+- UI library: `<AxcUIProvider components={{ Select, Input, … }} locale={zhCN}>`. Adapters receive values, not events.
+- Axc does not evaluate rules, call models or save data; the host app does.
+
+## Docs
+
+- [README](https://github.com/axclogo/AxcCondition/blob/main/README.md): install, examples for all four components, API, error codes, protocol, runtime semantics, FAQ
+- [UI adapters](https://github.com/axclogo/AxcCondition/blob/main/docs/ui-adapters.md): contract for each control, checklist, prompt for AI assistants
+- [Ant Design adapter](https://github.com/axclogo/AxcCondition/blob/main/docs/antd-adapter.tsx): complete, tested template
+- [Public API report](https://github.com/axclogo/AxcCondition/blob/main/api/index.api.md): every exported type and function
+- [中文文档](https://github.com/axclogo/AxcCondition/blob/main/README.zh-CN.md)

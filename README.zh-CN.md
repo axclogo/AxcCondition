@@ -2,7 +2,10 @@
 
 [English](./README.md) | 简体中文
 
-用于编辑筛选条件的 React 组件，可选 AI 辅助生成，并支持“前置条件 → AI 判断 → 后置条件”流程。
+[![CI](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml/badge.svg)](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml)
+
+轻量的 **React 条件构建器 / 查询构建器 / 筛选器（query builder / filter builder）**：规则以纯 JSON 存储，
+校验返回稳定的错误码，并可通过 JSON Schema（结构化输出）让大模型生成条件。同时支持编辑“前置条件 → AI 判断 → 后置条件”流程。
 协议层（`@axc/condition/core`）零依赖，可在任意环境（包括 Node.js）中使用。
 
 - 唯一的 peer 依赖是 React 18 或 19。不依赖 UI 库、模型 SDK，也不发网络请求。
@@ -19,6 +22,19 @@ Axc 只负责编辑和校验配置。条件执行、模型调用、保存和调�
 错误显示在所属的行上（如上图的“必填”）。AI 候选先预览，再决定是否应用：
 
 ![AI 辅助候选预览](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-assist.zh-CN.png)
+
+### 适合的场景
+
+- 需要让用户搭建 AND/OR 筛选规则（嵌套组、带类型的字段、范围、列表、字段间比较），并以 JSON 保存。
+- 希望让大模型根据一句话生成规则，输出受 JSON Schema 约束，并在应用前完成校验。
+- 已经在用某个 UI 库（Ant Design、MUI、shadcn/ui、Semi 等），希望构建器沿用它的控件。
+
+### 不适合的场景
+
+- 需要现成的 SQL、MongoDB、CEL、JsonLogic 导出或内置规则执行器。Axc 只负责编辑和校验；
+  [react-querybuilder](https://github.com/react-querybuilder/react-querybuilder) 和
+  [react-awesome-query-builder](https://github.com/ukrbublik/react-awesome-query-builder) 提供格式化导出和更多控件。
+- 需要拖拽调整规则顺序。
 
 ## 目录
 

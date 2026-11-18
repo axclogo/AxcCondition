@@ -61,7 +61,10 @@ several editor bugs. The stored condition and decision JSON format is **unchange
 13. **Schema details.** Text values use `pattern: "\\S"` (non-blank) instead of `minLength: 1`, matching the parser.
     The generated `$defs` layout is otherwise the same.
 
-14. **`dist/` is no longer committed.** Installing from git runs `prepare`, which builds the package. If you vendor the
+14. **`AxcUIProvider` renders no wrapper element** and no longer takes `className` / `style`. Put theme classes,
+    CSS variables or `data-axc-theme` on your own container instead.
+
+15. **`dist/` is no longer committed.** Installing from git runs `prepare`, which builds the package. If you vendor the
     repository, run `npm ci && npm run build`.
 
 ### Fixed

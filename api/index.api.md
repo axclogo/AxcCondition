@@ -5,7 +5,6 @@
 ```ts
 
 import type { ComponentType } from 'react';
-import { CSSProperties } from 'react';
 import { JSX } from 'react';
 import { ReactNode } from 'react';
 
@@ -450,12 +449,8 @@ export function AxcUIProvider(input: AxcUIProviderProps): JSX.Element;
 export interface AxcUIProviderProps {
     // (undocumented)
     children: ReactNode;
-    // (undocumented)
-    className?: string;
     components?: Partial<AxcUIComponents>;
     locale?: AxcLocale;
-    // (undocumented)
-    style?: CSSProperties;
 }
 
 // @public

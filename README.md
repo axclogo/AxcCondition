@@ -2,8 +2,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-React components for editing filter conditions, with optional AI-assisted generation and a
-precondition → AI decision → postcondition workflow. The protocol layer (`@axc/condition/core`)
+[![CI](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml/badge.svg)](https://github.com/axclogo/AxcCondition/actions/workflows/ci.yml)
+
+A lightweight **React query builder / condition builder / filter builder** that stores rules as plain JSON,
+validates them with stable error codes, and can let an LLM generate conditions through JSON Schema
+(structured output). It also edits a precondition → AI decision → postcondition workflow. The protocol layer (`@axc/condition/core`)
 has no dependencies and runs anywhere, including Node.js.
 
 - React 18 or 19 is the only peer dependency. No UI library, no model SDK, no network calls.
@@ -20,6 +23,19 @@ Axc edits and validates configuration. It does not evaluate conditions, call mod
 Errors are shown on the row they belong to ("Required." above). AI candidates are previewed before they are applied:
 
 ![AI assist candidate preview](https://raw.githubusercontent.com/axclogo/AxcCondition/main/docs/images/condition-assist.png)
+
+### When to use it
+
+- You need users to build AND/OR filter rules (nested groups, typed fields, ranges, lists, field-to-field comparisons) and save them as JSON.
+- You want an LLM to draft those rules from a sentence, with the output constrained by JSON Schema and validated before it is applied.
+- You already have a UI library (Ant Design, MUI, shadcn/ui, Semi, …) and want the builder to use it.
+
+### When not to use it
+
+- You need ready-made export to SQL, MongoDB, CEL or JsonLogic, or a built-in rule evaluator. Axc only edits and validates;
+  [react-querybuilder](https://github.com/react-querybuilder/react-querybuilder) and
+  [react-awesome-query-builder](https://github.com/ukrbublik/react-awesome-query-builder) ship formatters and more widgets.
+- You want drag-and-drop rule reordering.
 
 ## Contents
 

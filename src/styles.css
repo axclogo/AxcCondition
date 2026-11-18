@@ -48,9 +48,6 @@ button.axc-native-control {
 .axc-native-select > .axc-native-control {
 	width: 100%;
 }
-.axc-ui {
-	min-width: 0;
-}
 .axc-panel,
 .axc-group {
 	display: flex;
