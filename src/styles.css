@@ -1,0 +1,188 @@
+/* Scoped to Axc containers. Hosts override the variables; nothing touches body or global themes. */
+:where(.axc-condition, .axc-condition-assist, .axc-decision, .axc-decision-assist) {
+	color: var(--axc-text, #243147);
+	font: inherit;
+	min-width: 0;
+}
+:where([data-axc-theme='dark']) {
+	--axc-bg: #20242b;
+	--axc-panel: #292f38;
+	--axc-text: #e4e9f0;
+	--axc-border: #515c6b;
+	--axc-accent: #8db6ff;
+	--axc-danger: #ffaaa4;
+	color-scheme: dark;
+}
+/* Appearance applies to default controls only; injected controls never get this class. */
+.axc-native-control {
+	font: inherit;
+	color: var(--axc-text, #243147);
+	border: 1px solid var(--axc-border, #d4dce7);
+	border-radius: var(--axc-radius, 5px);
+	background: var(--axc-bg, #fff);
+	padding: var(--axc-control-padding, 7px 9px);
+	box-sizing: border-box;
+	max-width: 100%;
+	min-width: 0;
+}
+button.axc-native-control {
+	cursor: pointer;
+}
+.axc-native-control:disabled {
+	opacity: 0.55;
+	cursor: default;
+}
+.axc-native-control:focus-visible {
+	outline: 2px solid var(--axc-accent, #245bc5);
+	outline-offset: 2px;
+}
+.axc-native-danger {
+	color: var(--axc-danger, #b3261e);
+}
+.axc-native-select {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+.axc-native-select > .axc-native-control {
+	width: 100%;
+}
+.axc-ui {
+	min-width: 0;
+}
+.axc-panel,
+.axc-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--axc-gap, 12px);
+	padding: var(--axc-panel-padding, 12px);
+	border: 1px solid var(--axc-border, #d4dce7);
+	border-radius: var(--axc-panel-radius, 7px);
+	background: var(--axc-panel, #f6f8fb);
+	min-width: 0;
+}
+.axc-panel {
+	margin-top: 12px;
+}
+.axc-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+.axc-native-checkbox {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.axc-rule {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 10px;
+	border: 1px solid var(--axc-border, #d4dce7);
+	border-radius: 6px;
+	background: var(--axc-bg, #fff);
+}
+.axc-rule > .axc-select {
+	flex: 0 1 160px;
+}
+.axc-rule-value {
+	flex: 1 1 180px;
+	min-width: 0;
+}
+.axc-rule-value > * {
+	width: 100%;
+}
+.axc-native-tags {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	border: 1px solid var(--axc-border, #d4dce7);
+	border-radius: 5px;
+	padding: 6px;
+	background: var(--axc-bg, #fff);
+}
+.axc-native-tags > .axc-native-control {
+	flex: 1 1 170px;
+	width: 100%;
+	min-width: 0;
+	border: none;
+}
+.axc-word {
+	display: inline-flex;
+	align-items: center;
+	max-width: 100%;
+	padding-left: 7px;
+	border-radius: 4px;
+	background: var(--axc-panel, #f6f8fb);
+}
+.axc-word > span {
+	overflow-wrap: anywhere;
+	min-width: 0;
+}
+.axc-word > button {
+	flex: none;
+	border: none;
+	background: transparent;
+	padding: 3px 7px;
+}
+.axc-subgroup {
+	min-width: 0;
+	padding-left: 12px;
+}
+.axc-subgroup > .axc-button {
+	margin-top: 6px;
+}
+.axc-range {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	min-width: 0;
+}
+.axc-range > span {
+	flex: 1 1 160px;
+	min-width: 0;
+}
+.axc-range > span > * {
+	width: 100%;
+}
+.axc-error {
+	color: var(--axc-danger, #b3261e);
+	overflow-wrap: anywhere;
+}
+
+.axc-rule > .axc-error {
+	flex-basis: 100%;
+}
+.axc-panel .axc-textarea {
+	width: 100%;
+	resize: vertical;
+}
+.axc-output {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.axc-output > .axc-input,
+.axc-output > .axc-select,
+.axc-output > .axc-tags {
+	flex: 1 1 140px;
+	min-width: 0;
+}
+.axc-candidate > p {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+	.axc-subgroup {
+		padding-left: 5px;
+	}
+	.axc-group {
+		padding: 8px;
+	}
+}

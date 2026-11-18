@@ -1,0 +1,33 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22.18.x, 24.x]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the release gate diffs against the base commit
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tests/react18/package-lock.json
+      # `prepare` builds the package during install, which also proves a git install works.
+      - run: npm ci
+      - run: npm ci --prefix tests/react18
+      # format, types, boundaries, lint, knip, tests on React 19 (with coverage gate) and 18, build, API report, size.
+      - run: npm run verify
+      - name: Release gate (CHANGELOG and version)
+        if: github.event_name == 'pull_request' || github.event.before != '0000000000000000000000000000000000000000'
+        run: node scripts/check-release.mjs ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+      - name: Verify published entry points
+        run: |
+          npm pack --dry-run
+          node --input-type=module -e "const core = await import('@axc/condition/core'); const ui = await import('@axc/condition'); if (core.parseCondition !== ui.parseCondition) throw new Error('core is bundled twice');"

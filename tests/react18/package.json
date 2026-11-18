@@ -1,0 +1,8 @@
+{
+	"private": true,
+	"description": "React 18 runtime used by `npm run test:react18`; resolved through tests/setup/react18.mjs.",
+	"dependencies": {
+		"react": "18.3.1",
+		"react-dom": "18.3.1"
+	}
+}
