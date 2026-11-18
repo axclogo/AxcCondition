@@ -55,10 +55,12 @@ Errors are shown on the row they belong to ("Required." above). AI candidates ar
 ## Install
 
 ```sh
-npm install @axc/condition
-# or straight from GitHub; `prepare` builds dist/ on install
 npm install github:axclogo/AxcCondition#v0.2.0
 ```
+
+Installs straight from the GitHub tag; npm builds `dist/` during install (`prepare`, about 20 s). Pin a tag for
+reproducible installs. Imports are the same as for a registry package: `@axc/condition`, `@axc/condition/core`,
+`@axc/condition/styles.css`.
 
 Node.js 22.18+ is required for development. The runtime code targets ES2022.
 

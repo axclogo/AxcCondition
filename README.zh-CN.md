@@ -54,10 +54,11 @@ Axc 只负责编辑和校验配置。条件执行、模型调用、保存和调�
 ## 安装
 
 ```sh
-npm install @axc/condition
-# 或直接从 GitHub 安装；安装时由 `prepare` 构建 dist/
 npm install github:axclogo/AxcCondition#v0.2.0
 ```
+
+直接从 GitHub tag 安装；安装时 npm 会自动构建 `dist/`（`prepare`，约 20 秒）。请固定 tag 以保证可复现。
+导入方式与 npm 包相同：`@axc/condition`、`@axc/condition/core`、`@axc/condition/styles.css`。
 
 开发需要 Node.js 22.18+。运行时代码目标为 ES2022。
 

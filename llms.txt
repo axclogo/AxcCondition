@@ -5,7 +5,7 @@
 > Optional LLM generation through JSON Schema structured output. Zero dependencies besides React 18/19.
 > Any UI library can supply the controls. English and Chinese built in.
 
-Install: `npm install @axc/condition`. Import styles: `import '@axc/condition/styles.css'`.
+Install: `npm install github:axclogo/AxcCondition#v0.2.0` (not on the npm registry; npm builds it on install). Import styles: `import '@axc/condition/styles.css'`.
 Framework-free protocol (validation, schemas, prompts): `import … from '@axc/condition/core'`.
 
 Key facts for code generation:
