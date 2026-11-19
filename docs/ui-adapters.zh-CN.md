@@ -80,3 +80,7 @@ Tags：回车提交（输入法组字时不提交），多行粘贴按行拆分�
 DateInput：date 为 "YYYY-MM-DD"，datetime 为本地 "YYYY-MM-DDTHH:mm:ss"，清空为 ""。
 不要改写 Axc 的值、不要加校验、不要做类型转换；这些由 Axc 负责。
 ```
+
+## 模型控件
+
+可选 `ModelSelect: ComponentType<AxcModelSelectProps>` 接收原始 `models: { id, label, provider? }[]`、`value: string | null` 和 `onChange(string | null)`，以及通用控件属性。宿主可用供应商 → 模型级联选择；不要从 label 拆供应商。只回调目录中的模型 id，清空回调 null，供应商节点不可作为模型提交。未提供此适配器时使用已配置的 Select。

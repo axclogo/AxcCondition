@@ -452,3 +452,7 @@ tests/            node:test + Testing Library + happy-dom；tests/react18 存放
 ```
 
 许可证：MIT。
+
+### 模型选择适配
+
+`AxcUIProvider` 支持可选 `components.ModelSelect`，完整传入模型编号、名称和供应商。可直接接入宿主的级联选择器；规则 JSON 和 AI 请求中的模型编号不变。契约见 [UI 适配文档](docs/ui-adapters.zh-CN.md#模型控件)。

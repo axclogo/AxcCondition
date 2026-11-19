@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Add an optional `ModelSelect` UI adapter receiving original model/provider metadata. Hosts can use cascading model pickers without parsing labels; model ids and AI protocols stay unchanged.
+
 ## 0.2.0
 
 This release makes the package language-neutral, gives errors a machine-readable shape, and fixes

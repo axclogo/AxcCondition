@@ -1,24 +1,9 @@
-import type { AxcModelOption } from '../core/types.js';
-import { Select } from '../ui/controls.js';
-import { useAxcLocale } from '../ui/provider.js';
+import type { AxcModelSelectProps } from './types.js';
+import { Select } from './controls.js';
+import { useAxcLocale } from './provider.js';
 
 /** Searchable model picker. `''` in the select maps to `null` (no model chosen). */
-export function ModelSelect({
-	models,
-	value,
-	onChange,
-	disabled,
-	label,
-	...link
-}: {
-	models: AxcModelOption[];
-	value: string | null;
-	onChange: (value: string | null) => void;
-	disabled?: boolean;
-	label: string;
-	invalid?: boolean;
-	describedBy?: string;
-}) {
+export function DefaultModelSelect({ models, value, onChange, disabled, label, ...link }: AxcModelSelectProps) {
 	const locale = useAxcLocale();
 	return (
 		<Select

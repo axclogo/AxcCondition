@@ -10,6 +10,7 @@ import {
 	type AxcAssistRequest,
 	type AxcAssistTransport,
 	type AxcConditionValue,
+	type AxcModelSelectProps,
 	type AxcDecisionPlan,
 	type AxcDecisionValue,
 } from '../src/index.js';
@@ -186,4 +187,29 @@ test('the assistant uses the provider locale for its prompt and text', async () 
 	fireEvent.change(screen.getByRole('textbox', { name: 'AI 辅助需求' }), { target: { value: '示例' } });
 	await act(async () => fireEvent.click(screen.getByRole('button', { name: '生成候选' })));
 	assert.ok(calls[0].request.prompt.includes('用户需求：示例'));
+});
+
+test('custom model control selects an opaque id for the assist request', async () => {
+	const { transport, calls } = deferred();
+	const models = [{ id: 'provider/model-id', label: 'Label', provider: 'Provider' }];
+	function ModelSelect(props: AxcModelSelectProps) {
+		return (
+			<button type="button" disabled={props.disabled} onClick={() => props.onChange(models[0].id)}>
+				Choose host model
+			</button>
+		);
+	}
+	render(
+		<AxcUIProvider components={{ ModelSelect }}>
+			<AxcConditionAssist fields={fields} value={group()} onChange={() => {}} assist={{ ...transport, models }} />
+		</AxcUIProvider>,
+	);
+	fireEvent.click(screen.getByRole('button', { name: 'Generate conditions with AI' }));
+	fireEvent.click(screen.getByRole('button', { name: 'Choose host model' }));
+	fireEvent.change(screen.getByRole('textbox', { name: 'What should the AI generate?' }), {
+		target: { value: 'alpha' },
+	});
+	await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Generate' })));
+	assert.equal(calls[0].request.model, 'provider/model-id');
+	await answer(calls[0].resolve, { explanation: 'Only alpha', value: group('alpha') });
 });

@@ -80,3 +80,7 @@ Tags: Enter commits (not during IME composition), multi-line paste splits by lin
 never commit on blur. DateInput: date "YYYY-MM-DD", datetime local "YYYY-MM-DDTHH:mm:ss", cleared "".
 Do not change Axc's values, add validation, or coerce types; Axc does that.
 ```
+
+## Model control
+
+Optional `ModelSelect: ComponentType<AxcModelSelectProps>` receives original `models: { id, label, provider? }[]`, `value: string | null`, `onChange(string | null)` and common control props. Hosts may use provider → model cascading controls without parsing labels. Emit only a listed model id, or null when cleared; provider nodes are not selectable model values. When omitted, the configured Select is used.

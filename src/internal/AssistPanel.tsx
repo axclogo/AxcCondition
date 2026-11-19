@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Button, TextArea } from '../ui/controls.js';
+import { ModelSelect, Button, TextArea } from '../ui/controls.js';
 import { useAxcLocale } from '../ui/provider.js';
 import type { AxcAssistRequest, AxcAssistResult, AxcAssistTransport } from '../core/types.js';
 import { AxcValidationError, type AxcIssue } from '../core/issues.js';
-import { ModelSelect } from './ModelSelect.js';
 import { Issues } from './Issues.js';
 
 interface AssistPanelProps<T> {

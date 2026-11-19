@@ -455,3 +455,7 @@ tests/            node:test + Testing Library + happy-dom; tests/react18 holds t
 ```
 
 License: MIT.
+
+### Model picker adapter
+
+`AxcUIProvider` accepts an optional `components.ModelSelect` with original model ids, labels and providers. Plug in a host cascading picker without changing stored rules or model request ids. See the [adapter contract](docs/ui-adapters.md#model-control).

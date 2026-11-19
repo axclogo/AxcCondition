@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from 'react';
-import type { ConditionOption } from '../core/types.js';
+import type { AxcModelOption, ConditionOption } from '../core/types.js';
 
 /**
  * Contract shared by every control. An adapter must:
@@ -48,6 +48,15 @@ export interface AxcSelectProps extends AxcControlProps {
 	onChange: (value: string) => void;
 	/** Let the user filter options by label. */
 	searchable?: boolean;
+}
+
+/** Model picker. Keep model ids opaque; emit a listed id or null when cleared.
+ * Receives the original provider metadata for grouped or cascading host controls.
+ */
+export interface AxcModelSelectProps extends AxcControlProps {
+	models: AxcModelOption[];
+	value: string | null;
+	onChange: (value: string | null) => void;
 }
 
 /** Multiple choice. Emits values from enabled `options` only; cleared is `[]`. */
@@ -104,6 +113,8 @@ export interface AxcDateInputProps extends AxcControlProps {
  * component created during render remounts on every render and loses focus and drafts.
  */
 export interface AxcUIComponents {
+	/** Optional model-specific control; when omitted, models use the configured Select. */
+	ModelSelect?: ComponentType<AxcModelSelectProps>;
 	Button: ComponentType<AxcButtonProps>;
 	Input: ComponentType<AxcInputProps>;
 	TextArea: ComponentType<AxcTextAreaProps>;

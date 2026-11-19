@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { Button, Checkbox, Input, TextArea, Select, MultiSelect } from '../ui/controls.js';
+import { ModelSelect, Button, Checkbox, Input, TextArea, Select, MultiSelect } from '../ui/controls.js';
 import { useAxcLocale } from '../ui/provider.js';
 import type { AxcConditionCatalog, AxcModelOption, AxcAssistTransport } from '../core/types.js';
 import { emptyCondition } from '../core/condition.js';
@@ -7,7 +7,6 @@ import { decisionFields, validateDecision, type AxcDecisionField, type AxcDecisi
 import type { AxcIssue, AxcPath } from '../core/issues.js';
 import { AxcCondition } from './AxcCondition.js';
 import { AxcConditionAssist } from './AxcConditionAssist.js';
-import { ModelSelect } from '../internal/ModelSelect.js';
 import { WordsInput } from '../internal/WordsInput.js';
 import { Issues, issueProps, startsWith } from '../internal/Issues.js';
 import { useKeys } from '../internal/useKeys.js';

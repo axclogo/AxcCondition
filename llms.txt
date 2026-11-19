@@ -25,6 +25,7 @@ Key facts for code generation:
 - AI: pass `assist={{ models: [{ id, label }], generate: (request, signal) => yourModelCall(request) }}`;
   `request` is `{ model, prompt, response_schema }`; resolve with the parsed JSON object.
 - UI library: `<AxcUIProvider components={{ Select, Input, … }} locale={zhCN}>`. Adapters receive values, not events.
+- Optional `ModelSelect` UI adapter receives original models/provider metadata; use it for host cascading pickers, keeping ids opaque.
 - Axc does not evaluate rules, call models or save data; the host app does.
 
 ## Docs

@@ -362,6 +362,16 @@ export interface AxcModelOption {
 }
 
 // @public
+export interface AxcModelSelectProps extends AxcControlProps {
+    // (undocumented)
+    models: AxcModelOption[];
+    // (undocumented)
+    onChange: (value: string | null) => void;
+    // (undocumented)
+    value: string | null;
+}
+
+// @public
 export interface AxcMultiSelectProps extends AxcControlProps {
     // (undocumented)
     onChange: (value: string[]) => void;
@@ -432,6 +442,7 @@ export interface AxcUIComponents {
     DateInput: ComponentType<AxcDateInputProps>;
     // (undocumented)
     Input: ComponentType<AxcInputProps>;
+    ModelSelect?: ComponentType<AxcModelSelectProps>;
     // (undocumented)
     MultiSelect: ComponentType<AxcMultiSelectProps>;
     // (undocumented)

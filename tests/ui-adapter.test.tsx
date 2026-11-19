@@ -8,6 +8,7 @@ import {
 	AxcUIProvider,
 	emptyDecision,
 	type AxcConditionValue,
+	type AxcModelSelectProps,
 	type AxcDecisionValue,
 	type AxcUIComponents,
 	type ConditionField,
@@ -254,4 +255,33 @@ test('native controls honour the contract: non-submit buttons, label as name, cl
 		<AxcCondition fields={fields} value={value} disabled onChange={() => assert.fail('disabled control fired')} />,
 	);
 	for (const button of screen.getAllByRole('button')) fireEvent.click(button);
+});
+
+test('model adapter receives original metadata and decision values without label parsing', () => {
+	const models = [{ id: 'opaque/id', label: 'model / label', provider: 'provider / label' }];
+	let received: AxcModelSelectProps | undefined;
+	const ModelSelect = (props: AxcModelSelectProps) => {
+		received = props;
+		return <span data-testid="host-model" className={props.className} />;
+	};
+	const changes: AxcDecisionValue[] = [];
+	const current = { ...emptyDecision(), model: 'opaque/id' };
+	const { rerender } = render(
+		<AxcUIProvider components={{ ModelSelect }}>
+			<AxcDecision fields={fields} value={current} models={models} onChange={(next) => changes.push(next)} />
+		</AxcUIProvider>,
+	);
+	assert.deepEqual(received?.models, models);
+	assert.equal(received?.value, 'opaque/id');
+	assert.match(received?.className ?? '', /axc-select/);
+	act(() => received?.onChange(null));
+	assert.equal(changes[0].model, null);
+	rerender(
+		<AxcUIProvider components={{ ModelSelect }}>
+			<AxcDecision fields={fields} value={emptyDecision()} models={models} onChange={() => {}} disabled />
+		</AxcUIProvider>,
+	);
+	assert.equal(received?.disabled, true);
+	assert.equal(received?.invalid, true);
+	assert.ok(received?.describedBy);
 });

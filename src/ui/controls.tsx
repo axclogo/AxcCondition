@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 import type { AxcUIComponents } from './types.js';
+import { DefaultModelSelect } from './DefaultModelSelect.js';
 import { useAxcComponents } from './provider.js';
 
 /**
@@ -24,3 +25,5 @@ export const MultiSelect = dispatch((c) => c.MultiSelect, 'axc-select');
 export const Checkbox = dispatch((c) => c.Checkbox, 'axc-checkbox');
 export const Tags = dispatch((c) => c.Tags, 'axc-tags');
 export const DateInput = dispatch((c) => c.DateInput, 'axc-date-input');
+
+export const ModelSelect = dispatch((c) => c.ModelSelect ?? DefaultModelSelect, 'axc-select');
